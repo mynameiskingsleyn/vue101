@@ -35,7 +35,6 @@ export default {
 
 <style lang="css" scoped>
   li{
-    display:flex;
     cursor:pointer;
   }
   li:hover {

@@ -4,12 +4,10 @@
           <div class="col-12">
             <SearchBar @termChanged="onTermChanged"></SearchBar>
           </div>
-          <div class="col-8">
-            <VideoList :videos="videos" @videoSelect="onVideoSelect"></VideoList>
-          </div>
-          <div class="col-4">
-            <video-detail :info="currentVideo"></video-detail>
-          </div>
+      </div>
+      <div class="row">
+        <video-detail :info="currentVideo"></video-detail>
+        <VideoList :videos="videos" @videoSelect="onVideoSelect"></VideoList>
       </div>
 
 
@@ -18,7 +16,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    //import axios from 'axios';
     import SearchBar from './components/SearchBar';
     import VideoList from './components/VideoList';
     import VideoDetail from './components/VideoDetail';
@@ -44,7 +42,7 @@
                 if(item.length < 3){
                   return;
                 }
-                axios.get('https://www.googleapis.com/youtube/v3/search',{
+                this.get('https://www.googleapis.com/youtube/v3/search',{
                     params:{
                         key:API_KEY,
                         type:'video',
@@ -58,7 +56,6 @@
             },
             onVideoSelect(video){
               this.selectedVideo = video;
-              //console.log('inside onVideoSelect on App');
             }
         },
         computed :{

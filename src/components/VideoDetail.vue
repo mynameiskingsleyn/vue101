@@ -1,6 +1,12 @@
 <template lang="html">
-  <div class="">
-    {{videoTitle}}
+  <div v-if="info" class="col-8">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" :src="videoUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="details">
+      <h4>{{videoTitle}} </h4>
+      <p>{{ videoDesc }}</p>
+    </div>
   </div>
 </template>
 
@@ -18,6 +24,13 @@ export default {
   computed:{
     videoTitle(){
       return !this.isEmpty(this.video) ? this.video.snippet.title : '';
+    },
+    videoDesc(){
+      return !this.isEmpty(this.video) ? this.video.snippet.description : '';
+    },
+    videoUrl(){
+      const {videoId} = this.video.id;
+      return `https://www.youtube.com/embed/${videoId}`;
     }
   },
   watch: {
@@ -26,5 +39,12 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  .details{
+    margin-top:10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    overflow: scroll;
+  }
 </style>
